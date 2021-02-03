@@ -406,9 +406,13 @@ TEST_SUITE("Tokenizers") {
     }
 }
 
-inline bool run_tests(rust::Str data_dir) {
+inline bool run_tests(rust::Str data_dir, rust::Slice<rust::String> cli_args) {
     doctest::Context context;
     data_dir_ = std::string(data_dir);
+    std::vector<const char*> c_str_args;
+    ffi::fill_vec(c_str_args, cli_args,
+                  [](rust::String& arg) { return arg.c_str(); });
+    context.applyCommandLine(c_str_args.size(), c_str_args.data());
     return context.run() == 0;
 }
 }  // namespace tokenizers

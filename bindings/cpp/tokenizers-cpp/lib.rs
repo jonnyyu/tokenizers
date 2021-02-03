@@ -9,6 +9,3 @@ mod pre_tokenizers;
 mod processors;
 mod tokenizer;
 mod tokens;
-
-#[cfg(test)]
-mod tests;

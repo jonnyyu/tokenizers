@@ -9,6 +9,11 @@ name = "tokenizers"
 path = "tokenizers-cpp/lib.rs"
 crate-type = ["cdylib"]
 
+[[test]]
+name = "cpp_doctest"
+path = "tokenizers-cpp/tests.rs"
+harness = false
+
 [dependencies]
 cxx = "1.0.27"
 derive_more = "0.99.11"
