@@ -360,6 +360,22 @@ TEST_SUITE("Tokenizers") {
         }
     }
 
+    TEST_CASE("load tokenizer") {
+        Tokenizer tokenizer = Tokenizer::from_file(data_file("roberta.json"));
+
+        const char* example = "This is an example";
+        rust::Vec<uint32_t> ids{713, 16, 41, 1246};
+        std::vector<std::string> tokens{"This", "Ġis", "Ġan", "Ġexample"};
+
+        Encoding encodings = tokenizer.encode(InputSequence(example), false);
+
+        COMPARE_CONTAINERS(encodings.get_ids(), ids);
+        COMPARE_CONTAINERS(encodings.get_tokens(), tokens);
+
+        rust::String decoded = tokenizer.decode(ids, false);
+        CHECK(decoded == example);
+    }
+
     TEST_CASE("Bert") {
         Tokenizer tokenizer(WordPieceBuilder()
                                 .files(bert_vocab())
