@@ -7,7 +7,7 @@ edition = "2018"
 [lib]
 name = "tokenizers"
 path = "tokenizers-cpp/lib.rs"
-crate-type = ["cdylib", "staticlib"]
+crate-type = ["staticlib"]
 
 [dependencies]
 cxx = "1.0.27"
