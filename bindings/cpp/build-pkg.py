@@ -23,6 +23,7 @@ def build():
         envs = os.environ
         envs['CFLAGS'] = '/MTd'
     shutil.rmtree('target', ignore_errors=True)
+    # override CFLAGS to build debug build, details see https://github.com/dtolnay/cxx/issues/880
     subprocess.check_call(['cargo', 'build'], env=envs)
     # build release
     subprocess.check_call(['cargo', 'build', '--release'])
